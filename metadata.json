@@ -1,0 +1,5 @@
+{
+  "name": "iCal Naptár Megjelenítő",
+  "description": "Egy minimalista webalkalmazás, amely iCalendar (.ics) fájlokat jelenít meg egy böngészhető naptárban, és lehetővé teszi a felhasználók számára, hogy feliratkozzanak a naptárakra.",
+  "requestFramePermissions": []
+}
