@@ -5,25 +5,24 @@
  * @returns {Date | null} A feldolgozott Date objektum vagy null.
  */
 function parseICalDate(dateString) {
-    if (!dateString) return null;
+    if (!dateString || dateString.length < 8) return null;
     
     const year = parseInt(dateString.substring(0, 4), 10);
     const month = parseInt(dateString.substring(4, 6), 10) - 1; // JS hónapok 0-indexeltek
     const day = parseInt(dateString.substring(6, 8), 10);
+
+    if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
 
     if (dateString.length > 8 && dateString.includes('T')) {
         const hour = parseInt(dateString.substring(9, 11), 10);
         const minute = parseInt(dateString.substring(11, 13), 10);
         const second = parseInt(dateString.substring(13, 15), 10);
         
-        // A 'Z' végződés UTC időzónát jelez.
         if (dateString.endsWith('Z')) {
-            return new Date(Date.UTC(year, month, day, hour, minute, second));
+            return new Date(Date.UTC(year, month, day, hour || 0, minute || 0, second || 0));
         }
-        // Időzóna nélküli (feltételezhetően helyi) idő.
-        return new Date(year, month, day, hour, minute, second);
+        return new Date(year, month, day, hour || 0, minute || 0, second || 0);
     } else {
-        // Csak dátum, időpont nélkül (egész napos esemény).
         return new Date(year, month, day);
     }
 }
@@ -36,7 +35,8 @@ function parseICalDate(dateString) {
  */
 export function parseICS(icsText, type = 'default') {
     const events = [];
-    const lines = icsText.replace(/\r\n/g, '\n').split('\n');
+    // Kezeli a különböző sortöréseket és az üres sorokat
+    const lines = icsText.replace(/\r\n/g, '\n').split('\n').filter(line => line.trim() !== '');
     
     let currentEvent = null;
 
@@ -49,15 +49,20 @@ export function parseICS(icsText, type = 'default') {
             }
             currentEvent = null;
         } else if (currentEvent) {
-            const [key, ...valueParts] = line.split(':');
-            const value = valueParts.join(':').trim();
+            const separatorIndex = line.indexOf(':');
+            if (separatorIndex === -1) continue;
+
+            const key = line.substring(0, separatorIndex);
+            const value = line.substring(separatorIndex + 1).trim();
 
             if (key.startsWith('SUMMARY')) {
                 currentEvent.summary = value;
             } else if (key.startsWith('DTSTART')) {
-                currentEvent.startDate = parseICalDate(value);
+                const date = parseICalDate(value);
+                if (date) currentEvent.startDate = date;
             } else if (key.startsWith('DTEND')) {
-                currentEvent.endDate = parseICalDate(value);
+                const date = parseICalDate(value);
+                if (date) currentEvent.endDate = date;
             } else if (key.startsWith('DESCRIPTION')) {
                 currentEvent.description = value.replace(/\\n/g, '\n');
             } else if (key.startsWith('LOCATION')) {
@@ -67,7 +72,6 @@ export function parseICS(icsText, type = 'default') {
             } else if (key.startsWith('RRULE')) {
                 currentEvent.rrule = value;
             }
-            // Itt lehetne további mezőket (COLOR, IMAGE, stb.) is feldolgozni.
         }
     }
 

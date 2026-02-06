@@ -34,7 +34,7 @@ header p {
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .subscribe-buttons a {
     display: flex;
@@ -58,11 +58,75 @@ header p {
 .waste-cal-btn:hover { background-color: #15803d; }
 .nameday-cal-btn { background-color: #4f46e5; }
 .nameday-cal-btn:hover { background-color: #4338ca; }
-.notable-day-cal-btn { background-color: #f97316; } /* Új */
-.notable-day-cal-btn:hover { background-color: #ea580c; } /* Új */
+.notable-day-cal-btn { background-color: #f97316; }
+.notable-day-cal-btn:hover { background-color: #ea580c; }
 .subscribe-buttons a svg {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+/* Kapcsoló vezérlők */
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0 auto 2rem auto;
+    max-width: 400px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+.controls-container h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+}
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.toggle-text {
+    cursor: pointer;
+}
+.toggle-switch-checkbox { 
+    display: none;
+}
+.toggle-switch-label {
+    display: block;
+    position: relative;
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    background: #e5e7eb;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+.toggle-switch-inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.toggle-switch-switch {
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out;
+}
+.toggle-switch-checkbox:checked + .toggle-switch-label {
+    background: #ef4444; /* Piros, ha aktív */
+}
+.toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch {
+    transform: translateX(20px);
 }
 
 /* Naptár */
@@ -82,7 +146,7 @@ header p {
     font-size: 1.5rem;
     font-weight: 600;
     text-transform: capitalize;
-    width: 12rem;
+    width: 15rem; /* Szélesebb, hogy elférjen a hosszú évszám */
     text-align: center;
 }
 .calendar-header button {
@@ -155,7 +219,8 @@ header p {
 }
 .event.waste { background-color: #22c55e; }
 .event.nameDay { background-color: #6366f1; }
-.event.notableDay { background-color: #fb923c; } /* Új */
+.event.notableDay { background-color: #fb923c; }
+.event.holiday { background-color: #dc2626; } /* Új */
 
 
 /* Lábléc */
