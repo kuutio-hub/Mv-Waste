@@ -4,39 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iCal Naptár</title>
-    <meta name="description" content="Egy dinamikus, böngészhető öröknaptár, amely iCalendar (.ics) fájlokat és beépített, kapcsolható ünnepnapokat is megjelenít.">
+    <meta name="description" content="Dinamikus öröknaptár modern, sötét, Apple-stílusú felülettel, amely iCalendar (.ics) fájlokat jelenít meg.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <nav class="main-nav">
+        <div class="date-selector">
+            <h2 id="month-year-display">Betöltés...</h2>
+            <div class="selectors">
+                <select id="month-select" aria-label="Hónap választása"></select>
+                <select id="year-select" aria-label="Év választása"></select>
+            </div>
+        </div>
+        <div id="calendar-controls" class="calendar-controls">
+            <!-- A naptár vezérlőgombokat a JavaScript dinamikusan generálja -->
+        </div>
+    </nav>
+
     <div class="container">
-        <header>
-            <h1>iCal Naptárak</h1>
-            <p>Böngészhető öröknaptár és feliratkozási lehetőségek</p>
-        </header>
-
-        <div id="subscribe-buttons" class="subscribe-buttons">
-            <!-- A gombokat a JavaScript dinamikusan generálja -->
-        </div>
-
-        <div class="controls-container">
-            <h3>Beépített naptárak</h3>
-            <div class="toggle-switch">
-                <input type="checkbox" id="holidays-toggle" class="toggle-switch-checkbox" checked>
-                <label class="toggle-switch-label" for="holidays-toggle">
-                    <span class="toggle-switch-inner"></span>
-                    <span class="toggle-switch-switch"></span>
-                </label>
-                <label for="holidays-toggle" class="toggle-text">Magyar ünnepnapok</label>
-            </div>
-        </div>
-
         <div class="calendar-container">
-            <div class="calendar-header">
-                <button id="prev-month" aria-label="Előző hónap">&lt;</button>
-                <h2 id="month-year">Betöltés...</h2>
-                <button id="next-month" aria-label="Következő hónap">&gt;</button>
-            </div>
-            <div class="calendar-grid" id="calendar-grid">
+            <div class="calendar-grid-header">
                 <div class="day-name">H</div>
                 <div class="day-name">K</div>
                 <div class="day-name">Sze</div>
@@ -45,12 +33,16 @@
                 <div class="day-name">Szo</div>
                 <div class="day-name">V</div>
             </div>
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- A naptár napjait a JavaScript dinamikusan generálja -->
+            </div>
         </div>
 
         <footer>
-            <p>© 2026 | Verzió: 0.0.0.9-beta</p>
+            <p>© 2026 | Verzió: 0.0.1.0-beta</p>
         </footer>
     </div>
+
     <script type="module" src="app.js"></script>
 </body>
 </html>

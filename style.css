@@ -1,242 +1,241 @@
-/* Alap stílusok és elrendezés */
+:root {
+    --background-color: #161617;
+    --text-color: #f5f5f7;
+    --text-color-secondary: #a0a0a5;
+    --glass-background: rgba(44, 44, 46, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --highlight-color: #0a84ff;
+    --today-bg: rgba(10, 132, 255, 0.2);
+    --today-border: #0a84ff;
+
+    --event-waste: #30d158;
+    --event-nameDay: #5e5ce6;
+    --event-notableDay: #ff9f0a;
+    --event-holiday: #ff453a;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f3f4f6;
-    color: #1f2937;
+    background-color: var(--background-color);
+    color: var(--text-color);
     margin: 0;
-    padding: 1rem;
+    padding-top: 80px; /* Hely a fix fejrésznek */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 1rem;
-}
-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #111827;
-}
-header p {
-    color: #4b5563;
-    margin-top: 0.5rem;
-}
 
-/* Feliratkozás gombok */
-.subscribe-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.subscribe-buttons a {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: white;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 350px;
-    justify-content: center;
-}
-.subscribe-buttons a:hover {
-    transform: scale(1.05);
-}
-.waste-cal-btn { background-color: #16a34a; }
-.waste-cal-btn:hover { background-color: #15803d; }
-.nameday-cal-btn { background-color: #4f46e5; }
-.nameday-cal-btn:hover { background-color: #4338ca; }
-.notable-day-cal-btn { background-color: #f97316; }
-.notable-day-cal-btn:hover { background-color: #ea580c; }
-.subscribe-buttons a svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 70px;
+    background: var(--glass-background);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000;
 }
 
-/* Kapcsoló vezérlők */
-.controls-container {
+.date-selector {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    background-color: white;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin: 0 auto 2rem auto;
-    max-width: 400px;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    gap: 1.5rem;
 }
-.controls-container h3 {
-    margin: 0;
-    font-size: 1rem;
+
+.date-selector h2 {
+    font-size: 1.5rem;
     font-weight: 600;
-    color: #374151;
+    text-transform: capitalize;
+    margin: 0;
+    min-width: 150px;
 }
-.toggle-switch {
+
+.selectors {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.selectors select {
+    background-color: rgba(118, 118, 128, 0.24);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23f5f5f7' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.calendar-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.control-group {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
-.toggle-text {
-    cursor: pointer;
-}
-.toggle-switch-checkbox { 
-    display: none;
-}
-.toggle-switch-label {
-    display: block;
-    position: relative;
-    width: 44px;
-    height: 24px;
+
+.control-group button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: rgba(118, 118, 128, 0.24);
+    border: 1px solid transparent;
     border-radius: 12px;
-    background: #e5e7eb;
+    padding: 0.4rem 0.8rem;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
-}
-.toggle-switch-inner {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.toggle-switch-switch {
-    display: block;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    transition: transform 0.2s ease-in-out;
-}
-.toggle-switch-checkbox:checked + .toggle-switch-label {
-    background: #ef4444; /* Piros, ha aktív */
-}
-.toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch {
-    transform: translateX(20px);
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-/* Naptár */
+.control-group button.active.waste { border-color: var(--event-waste); background-color: rgba(48, 209, 88, 0.2);}
+.control-group button.active.nameDay { border-color: var(--event-nameDay); background-color: rgba(94, 92, 230, 0.2);}
+.control-group button.active.notableDay { border-color: var(--event-notableDay); background-color: rgba(255, 159, 10, 0.2);}
+.control-group button.active.holiday { border-color: var(--event-holiday); background-color: rgba(255, 69, 58, 0.2);}
+
+
+.control-group a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.4rem;
+    border-radius: 8px;
+    transition: color 0.2s, background-color 0.2s;
+}
+.control-group a:hover {
+    color: var(--text-color);
+    background-color: rgba(118, 118, 128, 0.24);
+}
+
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
 .calendar-container {
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    background: var(--glass-background);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
     padding: 1.5rem;
 }
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.calendar-header h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-transform: capitalize;
-    width: 15rem; /* Szélesebb, hogy elférjen a hosszú évszám */
-    text-align: center;
-}
-.calendar-header button {
-    background: none;
-    border: 1px solid #d1d5db;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: #4b5563;
-    transition: background-color 0.2s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.calendar-header button:hover {
-    background-color: #e5e7eb;
-}
 
-.calendar-grid {
+.calendar-grid-header, .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.25rem;
 }
+
+.calendar-grid-header {
+    margin-bottom: 0.5rem;
+}
+
 .day-name {
     text-align: center;
     font-weight: 600;
-    color: #4b5563;
+    color: var(--text-color-secondary);
     padding-bottom: 0.5rem;
 }
+
 .day-cell {
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
+    border-top: 1px solid var(--glass-border);
     padding: 0.5rem;
-    min-height: 7rem;
+    min-height: 8rem;
     display: flex;
     flex-direction: column;
     transition: background-color 0.2s;
 }
+.day-cell:not(:nth-child(7n)) {
+    border-right: 1px solid var(--glass-border);
+}
 .day-cell.empty {
-    background-color: #f9fafb;
+    background-color: rgba(0,0,0,0.1);
 }
 .day-cell.today {
-    background-color: #eff6ff;
-    border-color: #93c5fd;
+    background-color: var(--today-bg);
 }
 .day-number {
     font-weight: 500;
+    align-self: flex-end;
 }
 .day-cell.today .day-number {
-    color: #2563eb;
-    font-weight: bold;
+    color: var(--today-border);
+    font-weight: 700;
+    background-color: var(--highlight-color);
+    color: white;
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.25rem;
 }
+
 .events-container {
     margin-top: 0.25rem;
     overflow-y: auto;
     flex-grow: 1;
     font-size: 0.75rem;
 }
+
 .event {
     color: white;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
+    padding: 0.25rem 0.4rem;
+    border-radius: 4px;
     margin-bottom: 0.25rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: default;
+    font-weight: 500;
 }
-.event.waste { background-color: #22c55e; }
-.event.nameDay { background-color: #6366f1; }
-.event.notableDay { background-color: #fb923c; }
-.event.holiday { background-color: #dc2626; } /* Új */
+.event.waste { background-color: var(--event-waste); }
+.event.nameDay { background-color: var(--event-nameDay); }
+.event.notableDay { background-color: var(--event-notableDay); }
+.event.holiday { background-color: var(--event-holiday); }
 
-
-/* Lábléc */
 footer {
     text-align: center;
-    color: #6b7280;
+    color: var(--text-color-secondary);
     margin-top: 2rem;
     font-size: 0.875rem;
 }
 
-/* Reszponzivitás */
-@media (min-width: 640px) {
-    .subscribe-buttons {
-        flex-direction: row;
+@media (max-width: 1024px) {
+    .main-nav {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
     }
-    .subscribe-buttons a {
-        width: auto;
+    body {
+        padding-top: 150px; /* Több hely a fejrésznek mobilon */
+    }
+    .date-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .calendar-controls {
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .day-cell {
+        min-height: 6rem;
     }
 }
