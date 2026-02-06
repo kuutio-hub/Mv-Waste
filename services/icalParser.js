@@ -31,10 +31,10 @@ function parseICalDate(dateString) {
 /**
  * Feldolgoz egy iCalendar (.ics) formátumú szöveget és visszaadja az események listáját.
  * @param {string} icsText - A teljes .ics fájl tartalma.
- * @param {'waste' | 'nameDay'} type - Az események típusának megjelölése a színezéshez.
+ * @param {string} type - Az események típusának megjelölése a színezéshez.
  * @returns {Array<Object>} Az eseményeket tartalmazó objektumok tömbje.
  */
-export function parseICS(icsText, type) {
+export function parseICS(icsText, type = 'default') {
     const events = [];
     const lines = icsText.replace(/\r\n/g, '\n').split('\n');
     
